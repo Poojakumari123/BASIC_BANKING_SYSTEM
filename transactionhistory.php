@@ -11,11 +11,15 @@
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="table.css">
-    <link rel="stylesheet" href="style.css">
     <title>transactionhistory</title>
+    <style>
+      .container-fluid {
+      font-size: 30px;
+    }
+    </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light" style="background-color:rgb(71, 168, 175)">
+    <nav class="navbar navbar-expand-lg navbar-light" style="background-color: rgb(98, 196, 196);">
         <div class="container-fluid">
           <a class="navbar-brand" href="index.html" style="font-size: 32px; padding-right: 30px;">Home</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -55,11 +59,8 @@
         <?php
 
             include 'connection.php';
-
             $sql ="select * from transaction";
-
             $query =mysqli_query($conn, $sql);
-
             while($rows = mysqli_fetch_assoc($query))
             {
         ?>
@@ -73,11 +74,9 @@
                 
         <?php
             }
-
         ?>
         </tbody>
     </table>
-
     </div>
 </div>
   <footer class="text-center mt-5 py-2">

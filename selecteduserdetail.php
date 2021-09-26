@@ -21,7 +21,6 @@ if(isset($_POST['submit'])){
          echo '</script>';
      }
 
-
      else if($amount > $sql1['Balance']) 
     {
         
@@ -29,15 +28,13 @@ if(isset($_POST['submit'])){
         echo ' alert("Bad Luck! Insufficient Balance")';  // showing an alert box.
         echo '</script>';
     }
-
- 
+	
     else if($amount == 0){
 
         echo "<script type='text/javascript'>";
         echo "alert('Oops! Zero value cannot be transferred')";
         echo "</script>";
     }
-
 
     else {
         
@@ -46,13 +43,12 @@ if(isset($_POST['submit'])){
         $sql = "UPDATE user set Balance=$newbalance where ID=$from";
         mysqli_query($conn,$sql);
      
-
         // adding amount to reciever's account
         $newbalance = $sql2['Balance'] + $amount;
         $sql = "UPDATE user set Balance=$newbalance where ID=$to";
         mysqli_query($conn,$sql);
         
-        
+        // Now insert in database
         $sender = $sql1['Name'];
         $receiver = $sql2['Name'];
         $sql = "INSERT INTO transaction(`sender`, `receiver`, `amount`) VALUES ('$sender','$receiver','$amount')";
@@ -64,11 +60,9 @@ if(isset($_POST['submit'])){
             </script>";
             
         }
-        
         $newbalance= 0;
         $amount =0;
     }
-
 }
 ?>
 <!DOCTYPE html>
@@ -80,16 +74,18 @@ if(isset($_POST['submit'])){
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="table.css">
-    <link rel="stylesheet" type="text/css" href="style.css">
+  <link rel="stylesheet" href="table.css">
 
     <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-    <title>Transaction</title>
+    <title>TransactionDetail</title>
 
     <style type="text/css">
+    
+    .container-fluid {
+      font-size: 30px;
+    }
 		button{
 			border:none;
 			background: #d9d9d9;
@@ -101,10 +97,10 @@ if(isset($_POST['submit'])){
 		}
     </style>
 </head>
-<body style="background-color : white ;">
-<nav class="navbar navbar-expand-lg navbar-light" style="background-color:rgb(71, 168, 175)">
+<body>
+<nav class="navbar navbar-expand-lg navbar-light"style="background-color: rgb(98, 196, 196);">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#" style="font-size: 32px; padding-right: 30px;">Home</a>
+      <a class="navbar-brand" href="index.html" style="font-size: 32px; padding-right: 30px;">Home</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -152,7 +148,7 @@ if(isset($_POST['submit'])){
                     <td class="py-2"><?php echo $rows['Balance'] ?></td>
                 </tr>
         </table>
-    </div>
+  </div>
     <br><br><br>
 
     <label style="color : black;"><b>Transfer To:</b></label>
@@ -193,6 +189,7 @@ if(isset($_POST['submit'])){
     <p>© 2021. Made by <b>Pooja Kumari</b> <br> For the Project of <b>The Sparks Foundation</b></p>
   </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
-</body>
+
+  </body>
 </html>
 
